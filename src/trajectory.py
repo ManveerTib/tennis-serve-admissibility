@@ -18,6 +18,8 @@ from .constants import (
     DRAG_COEFFICIENT,
 )
 
+from .aerodynamics import drag_acceleration
+
 
 def projectile_derivative(t, state, g=G):
     """
@@ -39,56 +41,6 @@ def projectile_derivative(t, state, g=G):
     ])
 
 
-def drag_acceleration(
-    vx,
-    vz,
-    mass=BALL_MASS,
-    area=BALL_AREA,
-    air_density=AIR_DENSITY,
-    drag_coefficient=DRAG_COEFFICIENT
-):
-    """
-    Calculate acceleration caused by quadratic aerodynamic drag.
-
-    Parameters
-    ----------
-    vx, vz : float
-        Velocity components in m/s.
-    mass : float
-        Ball mass in kg.
-    area : float
-        Ball cross-sectional area in m^2.
-    air_density : float
-        Air density in kg/m^3.
-    drag_coefficient : float
-        Dimensionless drag coefficient.
-
-    Returns
-    -------
-    ax, az : float
-        Drag-induced acceleration components in m/s^2.
-    """
-
-    speed = np.sqrt(vx**2 + vz**2)
-
-    if speed == 0:
-        return 0.0, 0.0
-
-    drag_factor = (
-        -0.5
-        * air_density
-        * drag_coefficient
-        * area
-        * speed
-        / mass
-    )
-
-    ax = drag_factor * vx
-    az = drag_factor * vz
-
-    return ax, az
-
-
 def trajectory_with_drag(
     t,
     state,
@@ -108,18 +60,17 @@ def trajectory_with_drag(
 
     x, z, vx, vz = state
 
-    ax_drag, az_drag = drag_acceleration(
-        vx,
-        vz,
-        mass,
-        area,
-        air_density,
-        drag_coefficient
+    drag = drag_acceleration(
+        np.array([vx, vz]),
+        mass=mass,
+        area=area,
+        air_density=air_density,
+        drag_coefficient=drag_coefficient
     )
 
     return np.array([
         vx,
         vz,
-        ax_drag,
-        -g + az_drag
+        drag[0],
+        -g + drag[1]
     ])
