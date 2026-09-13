@@ -10,8 +10,16 @@ V2:
 
 import numpy as np
 
+from .constants import (
+    G,
+    BALL_MASS,
+    BALL_AREA,
+    AIR_DENSITY,
+    DRAG_COEFFICIENT,
+)
 
-def projectile_derivative(t, state, g=9.81):
+
+def projectile_derivative(t, state, g=G):
     """
     Return derivatives for a 2D gravity-only projectile.
 
@@ -34,10 +42,10 @@ def projectile_derivative(t, state, g=9.81):
 def drag_acceleration(
     vx,
     vz,
-    mass,
-    area,
-    air_density,
-    drag_coefficient
+    mass=BALL_MASS,
+    area=BALL_AREA,
+    air_density=AIR_DENSITY,
+    drag_coefficient=DRAG_COEFFICIENT
 ):
     """
     Calculate acceleration caused by quadratic aerodynamic drag.
@@ -84,11 +92,11 @@ def drag_acceleration(
 def trajectory_with_drag(
     t,
     state,
-    g=9.81,
-    mass=0.0575,
-    area=np.pi * (0.067 / 2)**2,
-    air_density=1.21,
-    drag_coefficient=0.55
+    g=G,
+    mass=BALL_MASS,
+    area=BALL_AREA,
+    air_density=AIR_DENSITY,
+    drag_coefficient=DRAG_COEFFICIENT
 ):
     """
     Return derivatives for a 2D tennis-ball trajectory
