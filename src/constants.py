@@ -22,7 +22,6 @@ BALL_AREA = np.pi * BALL_RADIUS**2
 # -------------------------
 
 AIR_DENSITY = 1.21          # air density, kg/m^3
-
 DRAG_COEFFICIENT = 0.55    # provisional constant drag coefficient
 
 
