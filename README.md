@@ -522,5 +522,5 @@ Full derivations, verification detail, robustness checks, and extended discussio
 </p>
 
 <p align="center">
-  <em>Built during the 2026 US Open. Go Ben Shelton!!</em>
+  <em>Built during the 2026 US Open. Go Ben Shelton! (I like Zverev too)</em>
 </p>
