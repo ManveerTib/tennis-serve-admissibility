@@ -515,6 +515,12 @@ Full derivations, verification detail, robustness checks, and extended discussio
 
 ---
 
+---
+
+<p align="center">
+  <img src="assets/ben-shelton.jpg" alt="Ben Shelton" width="350">
+</p>
+
 <p align="center">
   <em>Built during the 2026 US Open. Go Ben Shelton!!</em>
 </p>
